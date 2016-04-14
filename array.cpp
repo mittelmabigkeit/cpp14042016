@@ -3,6 +3,12 @@
 // переставить строки так, чтобы суммы их элементов возрастали.
 
 #include <iostream>
+
+void perel (array[x][b])
+{
+    
+}
+
 int main(int argc, char* argv[])
 {
 	setlocale(LC_ALL, "RUS");
@@ -22,28 +28,39 @@ int main(int argc, char* argv[])
 	}// for i
 
 	// теперь работаем с этим массивом
-	int sumelement[N]; // для хранения суммы элементов
-	int d = 0;
-    std::cout << "Суммы элементов в строках" << std::endl;
-	for (int k = 0; k < N; k++)   // строки
-	{
-		sumelement[k] = 0;
-		for (int m = 0; m < M; m++)  // стольбцы
-		{
-			sumelement[d] += array[k][m];
-		};
-		std::cout << sumelement[d] << std::endl;
-		d++;
-	}
 	// пузырьковый алгоритм
 
 	for (int w = 0; w < N-1; w++) {
 		for (int x = 0; x < N-w-1; x++) {
-			if (sumelement[x] > sumelement[x+1]) // если сумма передней строки больше
+			if (array[x][0] < array[x+1][0]) // если сумма передней строки больше
 			{    
-				int tmpsum = sumelement[x]; //переставляем суммы элементов
-				sumelement[x] = sumelement[x + 1];
-				sumelement[x + 1] = tmpsum;
+				//переставляем элементы
+				for (int b = 0; b < M; b++)
+				{
+					int tmp = array[x][b]; 
+					array[x][b] = array[x + 1][b];
+					array[x + 1][b] = tmp;
+				} //for b
+			} //if
+			else 
+            if (array[x][0] == array[x+1][0]) // если сумма передней строки больше
+			{   
+                 if (array[x][1] < array[x+1][1]) //  
+		    {     
+				//переставляем элементы
+				for (int b = 0; b < M; b++)
+				{
+					int tmp = array[x][b]; 
+					array[x][b] = array[x + 1][b];
+					array[x + 1][b] = tmp;
+				} //for b
+			} //if
+        }
+			else
+			if (array[x][1] == array[x+1][1]) // если сумма передней строки больше
+			{ 
+                  if (array[x][2] < array[x+1][2]) //  
+		     {       
 				//переставляем элементы
 				for (int b = 0; b < M; b++)
 				{
@@ -53,6 +70,7 @@ int main(int argc, char* argv[])
 				} //for b
 			} //if
 		} // x
+    }
 	}// w
 	
 	// результат
@@ -66,18 +84,6 @@ int main(int argc, char* argv[])
 		std::cout << std::endl;
 	}// for i
 	// выведем и 
-	d = 0;
-	std::cout << "Суммы элементов в строках в итоговом массиве" << std::endl;
-	for (int k = 0; k < N; k++)   // строки
-	{
-		sumelement[k] = 0;
-		for (int m = 0; m < M; m++)  // стольбцы
-		{
-			sumelement[d] += array[k][m];
-		};
-		std::cout << sumelement[d] << std::endl;
-		d++;
-	}
 	system("pause");
 	return 0;
 }
